@@ -1,7 +1,7 @@
 const routes = require('express').Router()
 const fs = require('fs')
 
-routes.get('/read', (req, res) => {
+routes.post('/read', (req, res) => {
     const key = req.body["key"]
     if(key === undefined){
         res.send("Error: Could not parse GET data")
@@ -13,7 +13,7 @@ routes.get('/read', (req, res) => {
         else{
             obj = JSON.parse(data)
             const currentTime = Date.now()
-            if(key in obj && (currentTime - obj[key]["createdTime"] <= obj[key]["ttl"] * 1000))
+            if(key in obj && (currentTime - obj[key]["createdTime"] <= obj[key]["ttl"] * 1000 || obj[key]["ttl"] == -1))
                 res.send(obj[key])
             else
                 res.send("Error: No such key found")

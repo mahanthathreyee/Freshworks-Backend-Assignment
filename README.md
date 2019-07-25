@@ -36,11 +36,16 @@ The data must in JSON format
 
 ## Sample Test Case
 The following bash commands can be executed in a linux/unix terminal or windows curl can be downloaded at https://curl.haxx.se/windows/
-```curl -d '{"key":"a", "value":"1"}' -H "Content-Type: application/json" http://127.0.0.1:3000/create
+```
+curl -d '{"key":"a", "value":"1"}' -H "Content-Type: application/json" http://127.0.0.1:3000/create
 curl -d '{"key":"b", "value":"2", "ttl": 1}' -H "Content-Type: application/json" http://127.0.0.1:3000/create
 curl -d '{"key":"c", "value":"3", "ttl": 180}' -H "Content-Type: application/json" http://127.0.0.1:3000/create
+curl -d '{"key":"a"}' -H "Content-Type: application/json" http://127.0.0.1:3000/read
+curl -d '{"key":"b"}' -H "Content-Type: application/json" http://127.0.0.1:3000/read
 curl -d '{"key":"c"}' -H "Content-Type: application/json" http://127.0.0.1:3000/read
-curl -d '{"key":"b", "value":"2", "ttl": 1}' -H "Content-Type: application/json" http://127.0.0.1:3000/create
+curl -d '{"key":"b", "value":"2", "ttl": 5}' -H "Content-Type: application/json" http://127.0.0.1:3000/create
+curl -d '{"key":"c"}' -H "Content-Type: application/json" http://127.0.0.1:3000/delete
+curl -d '{"key":"b"}' -H "Content-Type: application/json" http://127.0.0.1:3000/delete
 ```
 
 ## Repository Branches
