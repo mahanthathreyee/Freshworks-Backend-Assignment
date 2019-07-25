@@ -45,4 +45,7 @@ curl -d '{"key":"b", "value":"2", "ttl": 1}' -H "Content-Type: application/json"
 * `develop` contains the files with the most recent changes is mostly unstable
 
 **Current status of branch `master` is ahead of `develop`**
-**View the commits for the changes made during the development process. The development of this assignment started at approx. `8PM IST` on `25th July 2019`**
+
+**View the commits for the changes made during the development process.**
+
+**The development of this assignment started at approx. `8PM IST` on `25th July 2019`**
