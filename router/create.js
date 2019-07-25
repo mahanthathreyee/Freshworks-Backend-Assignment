@@ -1,13 +1,16 @@
 const routes = require('express').Router()
-var fs = require('fs')
+const fs = require('fs')
 
 routes.post('/create', (req, res) => {
-    var key = req.body["key"]
-    var value = req.body["value"]
+    const key = req.body["key"]
+    const value = req.body["value"]
+    const ttl = parseInt(req.body["ttl"])
     if(key === undefined || value === undefined){
         res.send("Error: Could not parse POST data")
         return
     }
+    if(ttl === undefined)
+        ttl = -1
     fs.readFile('data.json', 'utf8', (err, data) => {
         if(err){
             obj = {[key]: value}
@@ -21,11 +24,10 @@ routes.post('/create', (req, res) => {
         }
         else{
             obj = JSON.parse(data)
-            if(!(key in obj)){
-                obj[key] = value
-                console.log(key)
+            const currentTime = Date.now();
+            if(!(key in obj) || (currentTime - obj[key]["createdTime"] > obj[key]["ttl"])){
+                obj[key] = {"value": value, "createdTime": currentTime, "ttl": ttl}
                 json = JSON.stringify(obj)
-                console.log(json)
                 fs.writeFile('data.json', json, 'utf8', (err) => {
                     if(err)
                         res.send("Error: Could not write into file")
