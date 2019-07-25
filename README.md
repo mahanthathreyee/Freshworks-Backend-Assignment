@@ -21,7 +21,7 @@ The data must in JSON format
 ```
 {
     "key": {key}
-    "value": [value]
+    "value": {value}
     {"TTL"}: {TTL}  //Should be an integer in seconds 
 } 
 ```
