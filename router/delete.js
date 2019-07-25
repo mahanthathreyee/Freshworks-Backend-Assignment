@@ -1,7 +1,7 @@
 const routes = require('express').Router()
 const fs = require('fs')
 
-routes.post('/delete', (req, res) => {
+routes.get('/delete', (req, res) => {
     const key = req.body["key"]
     if(key === undefined){
         res.send("Error: Could not parse GET data")
@@ -15,6 +15,7 @@ routes.post('/delete', (req, res) => {
             const currentTime = Date.now()
 
             if(key in obj && (currentTime - obj[key]["createdTime"] <= obj[key]["ttl"] * 1000)){
+                //Deleting from object and then using JSON.stringify to store in file
                 delete obj[key]
                 json = JSON.stringify(obj)
                 fs.writeFile('data.json', json, 'utf8', (err) => {

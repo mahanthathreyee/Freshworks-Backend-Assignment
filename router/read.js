@@ -1,7 +1,7 @@
 const routes = require('express').Router()
 const fs = require('fs')
 
-routes.post('/read', (req, res) => {
+routes.get('/read', (req, res) => {
     const key = req.body["key"]
     if(key === undefined){
         res.send("Error: Could not parse GET data")
