@@ -18,7 +18,8 @@ The data store is created in root path as `data.json` automatically
 
 ## POST data format
 The data must in JSON format
-```{
+```
+{
     "key": {key}
     "value": [value]
     {"TTL"}: {TTL}  //Should be an integer in seconds 
@@ -30,4 +31,5 @@ The data must in JSON format
 curl -d '{"key":"b", "value":"2", "ttl": 1}' -H "Content-Type: application/json" http://127.0.0.1:3000/create
 curl -d '{"key":"c", "value":"3", "ttl": 180}' -H "Content-Type: application/json" http://127.0.0.1:3000/create
 curl -d '{"key":"c"}' -H "Content-Type: application/json" http://127.0.0.1:3000/read
-curl -d '{"key":"b", "value":"2", "ttl": 1}' -H "Content-Type: application/json" http://127.0.0.1:3000/create```
+curl -d '{"key":"b", "value":"2", "ttl": 1}' -H "Content-Type: application/json" http://127.0.0.1:3000/create
+```
