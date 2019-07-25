@@ -11,9 +11,11 @@ routes.post('/create', (req, res) => {
     }
     if(ttl === undefined)
         ttl = -1
+    
     fs.readFile('data.json', 'utf8', (err, data) => {
+        const currentTime = Date.now();
         if(err){
-            obj = {[key]: value}
+            obj = {[key]: {"value": value, "createdTime": currentTime, "ttl": ttl}}
             json = JSON.stringify(obj)
             fs.writeFile('data.json', json, 'utf8', (err) => {
                 if(err)
@@ -24,8 +26,7 @@ routes.post('/create', (req, res) => {
         }
         else{
             obj = JSON.parse(data)
-            const currentTime = Date.now();
-            if(!(key in obj) || (currentTime - obj[key]["createdTime"] > obj[key]["ttl"])){
+            if(!(key in obj) || (currentTime - obj[key]["createdTime"] > obj[key]["ttl"] * 1000)){
                 obj[key] = {"value": value, "createdTime": currentTime, "ttl": ttl}
                 json = JSON.stringify(obj)
                 fs.writeFile('data.json', json, 'utf8', (err) => {

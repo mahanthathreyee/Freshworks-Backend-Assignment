@@ -13,7 +13,7 @@ routes.post('/read', (req, res) => {
         else{
             obj = JSON.parse(data)
             const currentTime = Date.now()
-            if(key in obj && (currentTime - obj[key]["createdTime"] <= obj[key]["ttl"]))
+            if(key in obj && (currentTime - obj[key]["createdTime"] <= obj[key]["ttl"] * 1000))
                 res.send(obj[key])
             else
                 res.send("Error: No such key found")

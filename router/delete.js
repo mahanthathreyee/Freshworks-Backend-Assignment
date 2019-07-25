@@ -13,7 +13,8 @@ routes.post('/delete', (req, res) => {
         else{
             obj = JSON.parse(data)
             const currentTime = Date.now()
-            if(key in obj && (currentTime - obj[key]["createdTime"] <= obj[key]["ttl"])){
+
+            if(key in obj && (currentTime - obj[key]["createdTime"] <= obj[key]["ttl"] * 1000)){
                 delete obj[key]
                 json = JSON.stringify(obj)
                 fs.writeFile('data.json', json, 'utf8', (err) => {
